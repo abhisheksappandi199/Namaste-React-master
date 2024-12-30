@@ -24,12 +24,13 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING'
+      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+      // 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.624480699999999&page_type=DESKTOP_WEB_LISTING'
     );
 
     const json = await data.json();
 
-    // console.log(json);
+    console.log(json);
     // * optional chaining
     // setListOfRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     // setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
@@ -55,7 +56,7 @@ const Body = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
 
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants?.length === 0 ? (
     <Loader />
   ) : (
     <div className="body">
@@ -125,7 +126,7 @@ const Body = () => {
       <div className="flex flex-wrap justify-center">
         {/* // * looping through the <RestaurentCard /> components Using Array.map() method */}
 
-        {filteredRestaurant.map((restaurant) => (
+        {filteredRestaurant?.map((restaurant) => (
           <Link
             key={restaurant?.info.id}
             to={'/restaurants/' + restaurant?.info.id}
